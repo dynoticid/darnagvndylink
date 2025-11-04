@@ -24,11 +24,7 @@ body{
   50%{background-position:100% 50%;}
   100%{background-position:0% 50%;}
 }
-h1{
-  margin-bottom:20px;
-  font-size:2.2rem;
-  text-align:center;
-}
+h1{margin-bottom:20px;font-size:2.2rem;text-align:center;}
 .back-btn{
   align-self:flex-start;
   margin-bottom:15px;
@@ -41,14 +37,8 @@ h1{
   background: rgba(255,255,255,0.05);
   transition: all 0.25s ease;
 }
-.back-btn:hover{
-  background: rgba(255,255,255,0.12);
-}
-.search-box{
-  margin-bottom:20px;
-  width:100%;
-  max-width:650px;
-}
+.back-btn:hover{background: rgba(255,255,255,0.12);}
+.search-box{width:100%;max-width:650px;margin-bottom:20px;}
 .search-box input{
   width:100%;
   padding:10px 14px;
@@ -59,12 +49,8 @@ h1{
   background: rgba(255,255,255,0.1);
   color:#fff;
 }
-.search-box input::placeholder{
-  color:rgba(255,255,255,0.7);
-}
-.search-box input:focus{
-  background: rgba(255,255,255,0.2);
-}
+.search-box input::placeholder{color:rgba(255,255,255,0.7);}
+.search-box input:focus{background:rgba(255,255,255,0.2);}
 .card{
   width:100%;
   max-width:650px;
@@ -85,10 +71,7 @@ th,td{
   text-align:center;
   border-bottom:1px solid rgba(255,255,255,0.2);
 }
-th{
-  font-weight:700;
-  background: rgba(255,255,255,0.1);
-}
+th{font-weight:700;background: rgba(255,255,255,0.1);}
 .status-text{
   font-weight:600;
   font-size:0.95rem;
@@ -98,85 +81,77 @@ th{
   justify-content:center;
   gap:6px;
 }
-.status-text .dot{
-  font-size:1.2rem;
-}
+.status-text .dot{font-size:1.2rem;}
 .status-approve .dot { color: #39ff14; }   
 .status-takedown .dot { color: #ff8c00; } 
 .status-process .dot { color: #ffea00; }   
 .status-rejected .dot { color: #ff0033; }  
-.smartlink-text{
+
+.smartlink{
+  color:#38bdf8;
   font-weight:600;
-  color:#39f;
   text-decoration:underline;
-  cursor:default;
 }
-.pagination {
-  margin-top: 20px;
-  display: flex;
-  justify-content: center;
-  gap: 12px;
+
+.pagination{
+  margin-top:20px;
+  display:flex;
+  justify-content:center;
+  gap:12px;
 }
-.page-btn {
-  cursor: pointer;
-  padding: 8px 18px;
-  border-radius: 14px;
-  background: rgba(255, 255, 255, 0.2);
-  color: #fff;
-  font-weight: 600;
-  border: 1px solid rgba(255,255,255,0.3);
-  box-shadow: 0 0 10px rgba(255,255,255,0.15);
+.page-btn{
+  cursor:pointer;
+  padding:8px 18px;
+  border-radius:14px;
+  background: rgba(255,255,255,0.2);
+  color:#fff;
+  font-weight:600;
+  border:1px solid rgba(255,255,255,0.3);
+  box-shadow:0 0 10px rgba(255,255,255,0.15);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   transition: all 0.25s ease;
 }
-.page-btn:hover {
-  background: rgba(255, 255, 255, 0.35);
+.page-btn:hover{
+  background: rgba(255,255,255,0.35);
   box-shadow: 0 0 15px rgba(255,255,255,0.3);
   transform: scale(1.05);
 }
-.page-btn:disabled {
-  opacity: 0.4;
-  cursor: not-allowed;
+.page-btn:disabled{
+  opacity:0.4;
+  cursor:not-allowed;
   background: rgba(255,255,255,0.1);
-  box-shadow: none;
+  box-shadow:none;
 }
+
 footer{
   margin-top:35px;
   color:rgba(255,255,255,0.6);
   font-size:0.85rem;
   text-align:center;
 }
-@media(max-width:600px){
-  th,td{padding:12px 8px;font-size:0.85rem;}
-}
+@media(max-width:600px){th,td{padding:12px 8px;font-size:0.85rem;}}
 </style>
 </head>
 <body>
 
 <h1>Darna Gvnby - Releases</h1>
-
 <a href="https://dynoticid.github.io/smartlink/" class="back-btn">Back to Artists</a>
 
 <div class="search-box">
-  <input type="text" id="search" placeholder="Cari lagu...">
+  <input type="text" id="searchInput" placeholder="Cari lagu...">
 </div>
 
 <div class="card">
   <table>
     <thead>
-      <tr>
-        <th>Title</th>
-        <th>Status</th>
-        <th>Smartlink</th>
-      </tr>
+      <tr><th>Title</th><th>Status</th><th>Smartlink</th></tr>
     </thead>
     <tbody id="table-body"></tbody>
   </table>
-
   <div class="pagination">
-    <button class="page-btn" id="prev">Prev</button>
-    <button class="page-btn" id="next">Next</button>
+    <button class="page-btn" id="prevBtn">Prev</button>
+    <button class="page-btn" id="nextBtn">Next</button>
   </div>
 </div>
 
@@ -184,9 +159,9 @@ footer{
 
 <script>
 const songs = [
-  {title:"Rainy Shine", status:"process"},
-  {title:"Summer Time", status:"process"},
-  {title:"Asleep In A Dream", status:"process"}
+  {title:"Rainy Shine", status:"process", link:"#"},
+  {title:"Summer Time", status:"process", link:"#"},
+  {title:"Asleep In A Dream", status:"process", link:"#"}
 ];
 
 let filteredSongs = [...songs];
@@ -197,7 +172,7 @@ function renderTable(){
   const tableBody = document.getElementById("table-body");
   tableBody.innerHTML = "";
   const start = (currentPage-1)*rowsPerPage;
-  const end = start + rowsPerPage;
+  const end = start+rowsPerPage;
   const pageSongs = filteredSongs.slice(start,end);
 
   pageSongs.forEach(song=>{
@@ -205,32 +180,27 @@ function renderTable(){
     row.innerHTML = `
       <td>${song.title}</td>
       <td><span class="status-text status-${song.status}">
-        ${song.status.charAt(0).toUpperCase() + song.status.slice(1)}
-        <span class="dot">•</span>
+        ${song.status.charAt(0).toUpperCase() + song.status.slice(1)}<span class="dot">•</span>
       </span></td>
-      <td>Not Available</td>
+      <td>${song.status==="approve"? `<a href="${song.link}" class="smartlink" target="_blank">Link</a>`:"Not Available"}</td>
     `;
     tableBody.appendChild(row);
   });
 
-  document.getElementById("prev").disabled = currentPage === 1;
-  document.getElementById("next").disabled = end >= filteredSongs.length;
+  document.getElementById("prevBtn").disabled = currentPage===1;
+  document.getElementById("nextBtn").disabled = end>=filteredSongs.length;
 }
 
-document.getElementById("prev").addEventListener("click", ()=>{
-  currentPage--;
-  renderTable();
+document.getElementById("prevBtn").addEventListener("click", ()=>{
+  if(currentPage>1){currentPage--;renderTable();}
 });
-
-document.getElementById("next").addEventListener("click", ()=>{
-  currentPage++;
-  renderTable();
+document.getElementById("nextBtn").addEventListener("click", ()=>{
+  if(currentPage*rowsPerPage<filteredSongs.length){currentPage++;renderTable();}
 });
-
-document.getElementById("search").addEventListener("input",(e)=>{
+document.getElementById("searchInput").addEventListener("input",(e)=>{
   const keyword = e.target.value.toLowerCase();
-  filteredSongs = songs.filter(song => song.title.toLowerCase().includes(keyword));
-  currentPage = 1;
+  filteredSongs = songs.filter(s=>s.title.toLowerCase().includes(keyword));
+  currentPage=1;
   renderTable();
 });
 
